@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="form-group">
+        <label>בחר משתמש</label>
+        <span>
+            <angucomplete 
+                  placeholder="הזן שם או מספר אישי"
+                  pause="200"
+                  selectedobject="selectedUser"
+                  localdata="users"
+                  searchfields="displayName"
+                  titlefield="displayName"
+                  minlength="1"
+                  inputclass="form-control form-control-small"/> 
+        </span>
+        <br>
+        <br>
+        <label> בחר מסלול לשיוך </label>
+        <select class="form-control" ng-model="selectedTrackType"
+                ng-options="track as track.name for track in tracksTypes">
+            <option value="">לא משויך למסלול</option>
+        </select>
+        <br>
+        <br>
+        <label> בחר שלב במסלול לקידום</label>
+        <select class="form-control" ng-model="selectedStageName"
+                ng-options="stage.name as stage.name for stage in selectedTrackType.stages">
+            <option value="">בלי הוספת שלב</option>
+        </select>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-success" ng-click="addUsersToTrackType(selectedUser, selectedTrackType, selectedStageName);">שייך משתמש למסלול</button>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="container-fluid">
+    <uib-tabset active="active">
+        <uib-tab index="0" heading="עדכון פרטים">
+            <br>
+            <div class="form-group">
+                <label>בחר משתמש</label>
+                <angucomplete 
+                      placeholder="הזן שם או מספר אישי"
+                      pause="200"
+                      selectedobject="selectedUser"
+                      localdata="users"
+                      searchfields="displayName"
+                      titlefield="displayName"
+                      minlength="1"
+                      inputclass="form-control form-control-small"/>    
+            </div>
+            <br>
+            <br>
+            <div ng-if="selectedUser">
+                <form>
+                    <fieldset disabled>
+                        <div class="form-group">
+                            <label> שם משתמש </label>
+                            <input type="text" class="form-control" ng-model="selectedUser.originalObject._id"/>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <label> שם פרטי </label>
+                        <input type="text" class="form-control" ng-model="selectedUser.originalObject.firstName"/>
+                    </div>
+                    <div class="form-group">
+                        <label> שם משפחה </label>
+                        <input type="text" class="form-control" ng-model="selectedUser.originalObject.lastName"/>
+                    </div>
+                    <div class="form-group">
+                        <label> הרשאות </label>
+                        <select class="form-control" ng-model="selectedUser.originalObject.role">
+                            <option value="guide">משתמש בסיסי</option>
+                            <option value="commander">מנהל מערכת</option>
+                        </select>
+                    </div>
+                    <fieldset disabled>
+                        <div class="form-group">
+                            <label> קבוצה: </label>
+                            <select class="form-control" ng-model="selectedUser.originalObject.group"
+                                    ng-options="group as group for group in groups">
+                                <option value="">לא משויך לקבוצה</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label> מסלול </label>
+                            <select class="form-control" ng-model="selectedUser.originalObject.track"
+                                    ng-options="track._id as track.name for track in tracksTypes">
+                                <option value="">לא משויך למסלול</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <button type="submit" class="btn btn-success" ng-click="updateUser(selectedUser.originalObject)">עדכן נתונים</button>
+                </form>
+            </div>
+        </uib-tab>
+        <uib-tab index="1" heading="יצירת חדש">
+            <br>
+            <form>
+                <div class="form-group">
+                    <label> שם משתמש </label>
+                    <input type="text" class="form-control" ng-model="newUser._id"/>
+                </div>
+                <div class="form-group">
+                    <label> שם פרטי </label>
+                    <input type="text" class="form-control" ng-model="newUser.firstName"/>
+                </div>
+                <div class="form-group">
+                    <label> שם משפחה </label>
+                    <input type="text" class="form-control" ng-model="newUser.lastName"/>
+                </div>
+                <div class="form-group">
+                    <label> הרשאות </label>
+                    <select class="form-control" ng-model="newUser.role">
+                        <option value="guide">משתמש בסיסי</option>
+                        <option value="commander">מנהל מערכת</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success" ng-click="createNew(newUser); newUser = {};">הוסף חדש</button>
+            </form>
+        </uib-tab>
+    </uib-tabset>   
+</div>

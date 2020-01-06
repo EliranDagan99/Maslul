@@ -1,0 +1,87 @@
+@font-face{
+    font-family: alefReg;
+    src: url(../../cdn/alef-font/Alef-Regular.ttf);
+}
+
+body, h1, h2, h3, h4, h5, h6, p{
+    font-family: alefReg;
+    text-align: right;
+    direction: rtl;
+}
+
+
+.cover {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: #00bff3;
+    z-index: 99999;
+    top: 0;
+}
+
+#preloader-banner{
+    position:relative;
+    left:-50%;
+    margin-top:-115px;
+    width:600px;
+    height:230px;
+}
+
+#preloader-banner-container{
+    position:absolute;
+    left:50%;
+    top:50%;
+}
+
+#preloader-banner-middle{
+    position:absolute;
+    left:79px;
+    top:0;
+    width:440px;
+    height:190px;
+    background-color:#f26d7d;
+    border-radius: 25px;
+}
+
+#preloader-banner-text-a,#preloader-banner-text-b{
+    position:relative;
+    font-family:alefReg;
+    font-weight: 900;
+    color:#fff;
+    font-size:72px;
+    text-align:center;
+    margin-top:29px
+}
+
+#preloader-banner-text-b{
+    font-size:20px;
+    margin-top:-12px;
+    font-weight: normal;
+}
+
+#preloader-dots{
+    position:absolute;
+    left:194px;
+    top:130px;
+    width:53px;
+    height:9px
+}
+
+.preloader-dots-animation{
+    background-image:url(../../images/theme/preloader-dots-animation.gif);
+    transform: scaleX(-1);
+}
+
+.preloader-dots-static{
+    background-image:url(../../images/theme/preloader-dots-static.png)
+}
+
+.ng-hide {
+  height: 0;
+  width: 0;
+  background-color: transparent;
+  top:-200px;
+  left: 200px;
+}

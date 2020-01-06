@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="form-group">
+        <label>בחר משתמש</label>
+        <span>
+            <angucomplete 
+                  placeholder="הזן שם או מספר אישי"
+                  pause="200"
+                  selectedobject="selectedUser"
+                  localdata="users"
+                  searchfields="displayName"
+                  titlefield="displayName"
+                  minlength="1"
+                  inputclass="form-control form-control-small"/> 
+        </span>
+        <br>
+        <br>
+        <label> בחר קבוצה לשיוך </label>
+        <select class="form-control" ng-model="selectedGroup"
+                ng-options="group as group for group in groups">
+            <option value="">לא משויך לקבוצה</option>
+        </select>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-success" ng-click="addUsersToGroup();">שייך משתמש לקבוצה</button>
+    </div>
+</div>

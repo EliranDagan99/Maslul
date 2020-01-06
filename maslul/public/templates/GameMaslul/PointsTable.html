@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="/assets/css/Game/PointsTable.css"/>
+
+<div id="sky-container">
+    <div class="sea-wave" id="sea-wave-1">
+    </div>
+    <div id="sea-floor">
+    </div>
+    <div class="sea" id="sea-2">
+    </div>
+    <div class="algae-a" id="algae-1">
+    </div>
+    <div class="algae-b" id="algae-2">
+    </div>
+    <div class="coral-big" id="coral-big-1">
+    </div>
+    <div class="coral-big" id="coral-big-2">
+    </div>
+    <div class="coral-a" id="coral-1">
+    </div>
+    <div class="coral-b" id="coral-2">
+    </div>
+    <div class="turtle" id="turtle-1">
+    </div>
+    <div class="crab" id="crab-1">
+    </div>
+    <div class="fish" id="fish-1">
+</div>
+    
+<div class="view-content-container">
+
+    <div class="view-button-container">
+        <button class="btn button-view-box" 
+                ng-click="filterGroup=user.group" 
+                ng-disabled="filterGroup == user.group">
+            שכבה
+        </button>
+        <button class="btn button-view-box"
+                ng-click="filterGroup=undefined" 
+                ng-disabled="filterGroup == undefined">
+            מדור
+        </button>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <table class="table points-table">
+        <thead>
+            <tr>
+                <th> מקום </th>
+                <th> שם </th>
+                <th> מטבעות </th>
+            </tr>
+        </thead>
+        <tbody ng-repeat="user in allPointsTable | filter: {group: filterGroup}">
+            <tr ng-class="{active: (user._id == $parent.user._id)}">
+                <td ng-bind="$index + 1" class="td-place"></td>
+                <td>
+                    <span ng-bind="user.firstName"></span> <span ng-bind="user.lastName"></span>
+                </td>
+                <td>
+                    <img class="image-coins" src="/assets/images/theme/coin-min.png"/>
+                    <span class="user-coins" ng-bind="user.points"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

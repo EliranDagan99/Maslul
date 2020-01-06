@@ -1,0 +1,79 @@
+<form name="taskForm">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            <b>צפייה במשימה</b>
+        </h3>
+    </div>
+    <div class="modal-body">
+        <br>
+        <b>שם: </b>
+        <span ng-bind="currTask.name"></span>
+        <br>
+        <br>
+        <b>תיאור: </b>
+        <span ng-bind="currTask.description"></span>
+        <br>
+        <br>
+        <b>סוג: </b> 
+        <span ng-bind="currTask.type"></span>
+        <br>
+        <br>
+        <b>אושר? </b>
+        <span ng-if="currTask.approval == true">V</span>
+        <span ng-if="currTask.approval == false">X</span>
+        <br>
+        <br>
+        <b>שלב מקושר: </b>
+        <select class="form-control" ng-model="currTask.stage" ng-disabled="readonly" required>
+            <option ng-repeat="stageName in stagesNames track by $index" ng-value="$index">{{stageName}}</option>
+        </select>
+        <br>
+        <br>
+        <b>תאריך: </b>
+        <input type="date" class="form-control" ng-model="currTask.date.$date" ng-readonly="readonly" required/>
+        <span ng-if="currTask.attachedFilesRequired">
+            <br>
+            <br>
+            <b>קבצים מצורפים: </b>
+            <span ng-repeat="fileName in currTask.attachedFiles">
+                <br>
+                <a ng-href="/files/get/{{userid}}/{{fileName}}" target="_blank"><span ng-bind="fileName"></span></a>
+                &nbsp; &nbsp; &nbsp;
+                <button class="btn btn-danger btn-xs" ng-click="deleteFile($index)" ng-if="!readonly">X</button>
+            </span>
+            <span ng-if="(!currTask.attachedFiles) || (currTask.attachedFiles.length == 0)">
+                <br>
+                אין קבצים מצורפים
+                <br>
+            </span>
+            <span ng-if="!readonly">
+                <input type="file" file-upload get-response="getFileResponse(response)" action="/files/upload" userid="userid"/>
+            </span>
+        </span>
+        <span ng-if="currTask.ratingsFields.length != 0">
+            <br>
+            <br>
+            <b>שדות דירוג: </b>
+            <span ng-repeat="field in currTask.ratingsFields"
+                  ng-attr-title="{{field.description}}">
+                <br>
+                <span ng-bind="field.name"></span> (<span ng-bind="field.maxRange"></span> - <span ng-bind="field.minRange"></span>): <input type="number" class="form-control" ng-model="field.value" ng-readonly="readonly" ng-min="{{field.minRange}}" ng-max="{{field.maxRange}}" required/>
+            </span>  
+        </span>
+        <span ng-if="currTask.openFields.length != 0">
+            <br>
+            <br>
+            <b>שדות פתוחים: </b>
+            <span ng-repeat="field in currTask.openFields"
+                  ng-attr-title="{{field.description}}">
+                <br>
+                <span ng-bind="field.name"></span>: <input type="text" class="form-control" ng-model="field.value" ng-readonly="readonly"  required/>
+            </span>  
+        </span>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit" ng-click="save()" ng-if="!readonly">שמירה</button>
+        <button class="btn btn-primary" type="button" ng-click="cancel()" ng-if="readonly">אישור</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">ביטול</button>
+    </div>
+</form>

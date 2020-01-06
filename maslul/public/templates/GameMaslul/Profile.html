@@ -1,0 +1,145 @@
+<link rel="stylesheet" href="/assets/css/Game/Profile.css" />
+
+<div id="sky-container">
+    <div class="mountain" id="mountain-1"></div>
+    <div class="tree-dark-a" id="tree-4">
+    </div>
+    <div class="tree-bright-d" id="tree-5">
+    </div>
+    <div class="tree-dark-b" id="tree-6">
+    </div>
+    <div class="cloud" id="cloud-1">
+    </div>
+    <div class="cloud" id="cloud-2">
+    </div>
+    <div class="cloud" id="cloud-3">
+    </div>
+    <div class="view-content-container">
+        <div class="traget-content">
+            <span ng-if="!user.stages">
+                    <br/>
+                    למשתמש זה לא קיימים שלבים
+                </span>
+            <span ng-if="user.stages">
+                    <uib-tabset active="activeTab">
+                        <uib-tab index="$index + 1" ng-repeat="stage in user.stages" heading="{{stage.name}}">
+                            <br>
+                            <table class="table target-table">
+                                <thead>
+                                    <tr>
+                                        <th> שם המשימה </th>
+                                        <th> נקודות </th>
+                                        <th> דדן ליין </th>
+                                        <th> סוג </th>
+                                        <th> כמות שבוצעה </th>
+                                        <th> מחייב? </th>
+                                        <th> פירוט </th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="task in stage.tasks">
+                                    <tr>
+                                        <td ng-click="openNewTaskModal(task.tasktypeid, $parent.$index)"
+                                            style="cursor: pointer; font-weight: 600; text-decoration: underline;"
+                                            title="הזן משימה חדשה">
+                                            <span ng-bind="task.name"></span>
+            </td>
+            <td>
+                <div class="view-task-points">
+                    <img src="/assets/images/theme/coin-min.png" />
+                    <span>{{task.points}}</span>
+                </div>
+            </td>
+            <td>
+                <center>
+                    <span>{{task.dateMessage}}</span>
+                </center>
+                
+                <div ng-if="task.showLeftTime && !task.dateMessage.includes('אין')">
+                    <span ng-if="task.daysLeft > 0"> נשארו לך {{task.daysLeft}} ימים</span>
+                    
+                    <span ng-if="task.daysLeft < 0"><strong>אתה חורג ב {{task.daysLeft * -1}} ימים</strong></span>
+                </div>
+            </td>
+            <td ng-bind="task.type"></td>
+            <td>
+                <uib-progressbar max="task.minimumAmount" value="task.doneAmount" class="progress-striped active" type="{{progressBarType(task.doneAmount, task.minimumAmount)}}">
+                    <span style="color:white; white-space:nowrap; font-size: 15px;" class="task-done-amount">
+                                                    <span ng-bind="task.doneAmount"></span> מתוך
+                    <span ng-bind="task.minimumAmount"></span> משימות בוצעו
+                    </span>
+                </uib-progressbar>
+            </td>
+            <td>
+                <span ng-if="task.required">
+                                                <i class="fa fa-check fa-lg" aria-hidden="true"></i>
+                                            </span>
+                <span ng-if="!task.required">
+                                                <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+                                            </span>
+            </td>
+            <td>
+                <button class="btn btn-open-sub-table" ng-init="bIsShowTasksDetails=false" ng-click="bIsShowTasksDetails=!bIsShowTasksDetails" ng-disabled="task.doneTasks.length == 0">
+                    <span ng-if="!bIsShowTasksDetails">
+                                                    <i class="fa fa-chevron-down fa-lg" aria-hidden="true"></i>
+                                                </span>
+                    <span ng-if="bIsShowTasksDetails">
+                                                    <i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i>
+                                                </span>
+                </button>
+            </td>
+            </tr>
+            <tr ng-if="bIsShowTasksDetails">
+                <td colspan="5" class="td-sub-table">
+                    <table class="table" ng-if="task.doneTasks.length != 0">
+                        <thead>
+                            <tr>
+                                <th> תאריך </th>
+                                <th> אושר? </th>
+                                <th> פעולות </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="doneTask in task.doneTasks">
+                                <td ng-bind="doneTask.date.$date | date:'dd-MM-yyyy'"></td>
+                                <td>
+                                    <span ng-if="doneTask.approval == true">
+                                                                <i class="fa fa-check fa-lg" aria-hidden="true"></i>
+                                                            </span>
+                                    <span ng-if="doneTask.approval == false">
+                                                                <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+                                                            </span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-options" ng-click="openEditTaskModal(doneTask, true)"> צפייה
+                                    </button>
+                                    <button class="btn btn-options" ng-click="openEditTaskModal(doneTask, false)"> עריכה
+                                    </button>
+                                    <button class="btn btn-options" ng-click="deleteTask(doneTask)"> מחיקה
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+            <tbody ng-if="stage.tasks.length == 0">
+                <tr>
+                    <td colspan="5">
+                        אין משימות בשלב זה :(
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+            </uib-tab>
+            </uib-tabset>
+            </span>
+        </div>
+    </div>
+</div>
+<div id="ground-and-grass-container">
+    <div class="ground">
+    </div>
+    <div class="grass">
+    </div>
+</div>

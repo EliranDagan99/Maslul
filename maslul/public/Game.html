@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html ng-app="gameMaslulApp" ng-csp>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        
+        <!-- icons -->
+        <link rel="shortcut icon" href="/assets/images/gameicon.ico" type="image/x-icon"/>
+        <link rel="icon" href="/assets/images/gameicon.ico" type="image/x-icon"/>
+
+        <title> המסלול </title>
+    </head>
+    <body ng-controller="GameController">
+        
+        <!-- Preload libraries images and div -->
+        <img src="/assets/images/theme/preloader-dots-animation.gif" style="display:none;">
+        <link rel="stylesheet" href="/assets/css/Game/Preload.css"/>
+        <div class="cover" ng-if="!dataReady">
+            <div id="preloader-banner-container">
+                <div id="preloader-banner">
+                    <div id="preloader-banner-middle">
+                        <div id="preloader-banner-text-a"><span ng-bind="text"></span></div>
+                        <div id="preloader-banner-text-b" ng-hide="loading"><span ng-bind="subText"></span></div>
+                        <div class="preloader-dots-animation" id="preloader-dots" ng-if="loading"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Internal stylesheets libraries-->
+        <link rel="stylesheet" href="/assets/css/Game/Main.css"/>
+        
+        <!-- External stylesheets libraries-->
+        <link rel="stylesheet" href="/assets/cdn/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/assets/cdn/angular-ui-select/select.min.css">
+        <link rel="stylesheet" href="/assets/cdn/bootstrap/css/bootstrap-theme.min.css"/>
+        <link rel="stylesheet" href="/assets/cdn/bootstrap-rtl/bootstrap-rtl.min.css"/>
+        <link rel="stylesheet" href="/assets/cdn/alertify/alertify.rtl.min.css"/>
+        <link rel="stylesheet" href="/assets/cdn/alertify/bootstrap.rtl.min.css"/>
+        <link rel="stylesheet" href="/assets/cdn/font-awesome/css/font-awesome.min.css"/>
+        
+        <!-- Page Body -->
+        
+        <div id="container">
+            
+            <ng-view></ng-view>
+            
+            <div id="sky-container">
+                <div class="stage"
+                     title="השלב שלי במסלול">
+                    <div class="stage-text">
+                        <span ng-bind="lastStage.name"></span>
+                    </div>
+                </div>
+                <div class="title-box">
+                    <div class="title-text">
+                        המסלול
+                    </div>
+                </div>
+                <a href="/#">
+                    <div ng-if="currView == 'profile'"
+                         class="sea-ribbon-container"
+                         id="ribbon-container-1">
+                        <div class="sea-ribbon-left">
+                        </div>
+                        <div class="sea-ribbon-middle">
+                            פרופיל אישי
+                        </div>
+                        <div class="sea-ribbon-right">
+                        </div>
+                    </div>
+                    <div ng-if="currView != 'profile'"
+                         class="plant-ribbon-container"
+                         id="ribbon-container-1">
+                        <div class="plant-ribbon-left">
+                        </div>
+                        <div class="plant-ribbon-middle">
+                            פרופיל אישי
+                        </div>
+                        <div class="plant-ribbon-right">
+                        </div>
+                    </div>
+                </a>
+                <a href="/PointsTable">
+                    <div ng-if="currView == 'pointsTable'"
+                         class="sea-ribbon-container" 
+                         id="ribbon-container-2">
+                        <div class="sea-ribbon-left">
+                        </div>
+                        <div class="sea-ribbon-middle">
+                            לוח תוצאות
+                        </div>
+                        <div class="sea-ribbon-right">
+                        </div>
+                    </div>
+                    <div ng-if="currView != 'pointsTable'"
+                         class="plant-ribbon-container" 
+                         id="ribbon-container-2">
+                        <div class="plant-ribbon-left">
+                        </div>
+                        <div class="plant-ribbon-middle">
+                            לוח תוצאות
+                        </div>
+                        <div class="plant-ribbon-right">
+                        </div>
+                    </div>
+                </a>
+                <a href="/Tasks">
+                    <div ng-if="currView == 'tasks'"
+                         class="sea-ribbon-container" 
+                         id="ribbon-container-3">
+                        <div class="sea-ribbon-left">
+                        </div>
+                        <div class="sea-ribbon-middle">
+                            משימות בונוס
+                        </div>
+                        <div class="sea-ribbon-right">
+                        </div>
+                    </div>
+                    <div ng-if="currView != 'tasks'"
+                         class="plant-ribbon-container" 
+                         id="ribbon-container-3">
+                        <div class="plant-ribbon-left">
+                        </div>
+                        <div class="plant-ribbon-middle">
+                            משימות בונוס
+                        </div>
+                        <div class="plant-ribbon-right">
+                        </div>
+                    </div>
+                </a>
+                <div id="robby-container">
+                    <div id="robby">
+                        <div id="robby-slides">
+                        </div>
+                        <div id="robby-eyes-close" style="opacity: 0;">
+                        </div>
+                    </div>
+                </div>
+                <div class="coins-box"
+                     title="המטבעות שצברתי">
+                    <div class="coins-img">
+                    </div>
+                    <div class="coins-amount">
+                        <span ng-bind="user.points"></span>
+                    </div>
+                </div>
+                <div class="medal-box"
+                     title="המקום שלי בשכבה">
+                    <div class="medal-img">
+                    </div>
+                    <div class="medal-pos">
+                        <span ng-bind="rateInGroup"></span>
+                    </div>
+                </div>
+                <div class="banners-container">
+                    <div class="banner">
+                        <div class="banner-top-a">
+                        </div>
+                        <div class="banner-middle-a">
+                            <div class="banner-text-a">
+                                שלום
+                                <span ng-bind="user.firstName"></span>
+                                <span ng-bind="user.lastName"></span>!
+                            </div>
+                            <button class="btn btn btn-messages"
+                                    ng-if="user.messages.length > 0"
+                                    ng-click="$parent.bShowMessages = !$parent.bShowMessages;">
+                                <span ng-if="!$parent.bShowMessages">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i> 
+                                    <span ng-bind="user.messages.length"></span>
+                                </span>
+                                <span ng-if="$parent.bShowMessages">
+                                    <i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i>
+                                </span>
+                            </button>
+                            <uib-progressbar max="lastStage.requiredAmount" value="lastStage.doneAmount"
+                                             class="progress-striped active" 
+                                             type="{{mainProgressBarType(lastStage.doneAmount, lastStage.requiredAmount)}}">
+                                <span style="color:white; white-space:nowrap; font-size: 15px;"
+                                             class="stage-done-amount">
+                                    השלמת
+                                    <span ng-bind="lastStage.doneAmount"></span> מתוך 
+                                    <span ng-bind="lastStage.requiredAmount"></span>
+                                    משימות שדרושות לסיום השלב
+                                </span>
+                            </uib-progressbar>
+                            <div ng-if="bShowMessages" class="banner-messages">
+                                <b>הודעות:</b>
+                                <br/>
+                                <div ng-repeat="message in user.messages">
+                                    * 
+                                    <span ng-bind="message.date.$date | date:'dd/MM/yy'"></span> - 
+                                    <span ng-bind="message.text"></span>
+                                </div>
+                                <br/>
+                                <button class="btn btn-delete-message" ng-click="deleteMessages(); $parent.bShowMessages = false;">מחק הודעות</button>
+                            </div>
+                        </div>
+                        <div class="banner-bottom-a">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- External javascript libraries--> 
+        <script src="/assets/cdn/jquery/jquery-3.2.1.min.js"></script>
+        <script src="/assets/cdn/underscore/underscore-min.js"></script>
+        <script src="/assets/cdn/angular/angular.min.js"></script>
+        <script src="/assets/cdn/angular/angular-animate.min.js"></script>
+        <script src="/assets/cdn/angular/angular-route.min.js"></script>
+        <script src="/assets/cdn/angular/angular-touch.min.js"></script>
+        <script src="/assets/cdn/angular/angular-sanitize.js"></script>
+        <script src="/assets/cdn/ui-bootstrap/ui-bootstrap-tpls-2.5.0.min.js"></script>
+        <script src="/assets/cdn/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/assets/cdn/alertify/alertify.min.js"></script>
+        <script src="/assets/cdn/js-move/js-move.js"></script>
+    
+        <!-- Internal javascript libraries-->
+        <script src="/assets/scripts/GameMaslul/GameMaslulApp.js"></script>
+        <script src="/assets/scripts/GameMaslul/Controllers/GameController.js"></script>
+        <script src="/assets/scripts/GameMaslul/Controllers/ProfileController.js"></script>
+        <script src="/assets/scripts/GameMaslul/Controllers/PointsTableController.js"></script>
+        <script src="/assets/scripts/GameMaslul/Controllers/TasksController.js"></script>
+        <script src="/assets/scripts/GameMaslul/Controllers/WatchTaskModalController.js"></script>
+        <script src="/assets/scripts/GameMaslul/Services/UsersService.js"></script>
+        <script src="/assets/scripts/GameMaslul/Services/TasksTypesService.js"></script>
+        <script src="/assets/scripts/GameMaslul/Directives/FileUploadDirective.js"></script>
+        
+    </body>
+</html>

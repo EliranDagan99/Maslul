@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h3 class="modal-title">
+        <b> קידום לשלב הבא </b>
+    </h3>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        <label>
+            החייל נמצא כעת בשלב <span ng-bind="currStage"></span>
+            <br>
+            <span ng-if="!defaultNextStage">לא קיימת המלצה לשלב הבא</span>
+            <span ng-if="defaultNextStage">השלב הבא המומלץ עבורו הוא <span ng-bind="defaultNextStage"></span></span>
+            <br>
+            <br>
+            בחר את השלב הבא לקידום:
+        </label>
+        <select class="form-control" ng-model="nextStage"
+                ng-options="stage as stage for stage in stages">
+        </select>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="save()">בחר</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">ביטול</button>
+</div>

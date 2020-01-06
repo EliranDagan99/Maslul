@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="form-group">
+        <label>משימות שממתינות לאישור</label>
+            <br>
+            <br>
+            <span ng-if="waitingApprovalTasks.length == 0">
+                אין משימות שממתינות לאישור
+            </span>
+            <table class="table table-bordered" ng-if="waitingApprovalTasks.length > 0">
+                <thead>
+                    <tr>
+                        <th> תאריך </th>
+                        <th> שם המדריך </th>
+                        <th> שם המשימה </th>
+                        <th> צפייה </th>
+                        <th> אישור </th>
+                        <th> דחיה </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="task in waitingApprovalTasks">
+                        <td ng-bind="task.date | date:'HH:mm , dd-MM-yyyy'"></td>
+                        <td ng-bind="task.userName"></td>
+                        <td ng-bind="task.taskTypeName"></td>
+                        <td> 
+                            <button class="btn btn-default" ng-click="openEditTaskModal(task, true)"> צפייה </button>
+                            <button class="btn btn-default" ng-click="openEditTaskModal(task, false)"> עריכה </button>
+                        </td>
+                        <td> <button class="btn btn-success" ng-click="acceptTask(task, $index)"> V </button></td>
+                        <td> <button class="btn btn-danger" ng-click="rejectTask(task, $index)"> X </button></td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+</div>

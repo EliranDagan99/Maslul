@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html ng-app="manageMaslulApp" ng-csp>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        
+        <!-- icons -->
+        <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon"/>
+        <link rel="icon" href="images/icon.ico" type="image/x-icon"/>
+        
+        <!-- External stylesheets libraries-->
+        <link rel="stylesheet" href="cdn/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="cdn/bootstrap/css/bootstrap-theme.min.css"/>
+        <link rel="stylesheet" href="cdn/bootstrap-rtl/bootstrap-rtl.min.css"/>
+        <link rel="stylesheet" href="cdn/font-awesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="cdn/ng-table/ng-table.min.css"/>
+        <link rel="stylesheet" href="cdn/alertify/alertify.rtl.min.css"/>
+        <link rel="stylesheet" href="cdn/alertify/bootstrap.rtl.min.css"/>
+        <link rel="stylesheet" href="cdn/angcomplete/angucomplete.css"/>
+        <link rel="stylesheet" href="cdn/angular-ui-select/select.min.css"/>
+        
+        <!-- Internal stylesheets libraries-->
+        <link rel="stylesheet" href="css/Manage/Main.css"/>
+
+        
+        <title> מנהל המסלול </title>
+    </head>
+    <body ng-controller="ManageController">
+        
+        <div class="cover at-view-fade-in at-view-fade-out" ng-if="(!notAuthorized) && (!dataReady)">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+        
+        <div ng-class="{'no-access': notAuthorized == true}" ng-if="notAuthorized == true">
+            <br>
+            <br>
+            אין לך הרשאה לגשת לעמוד זה!
+        </div>
+        
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/#">
+                        <span>
+                            <img class="logo-img" src="/images/maslul-icon.png">
+                        </span>
+                        <span class="brand">
+                            <b> מנהל המסלול </b> 
+                        </span>
+                        <span class="brand-arrow">
+                            <b> > </b> 
+                        </span>
+                        <span class="view-name" ng-bind="currViewName">
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 sidebar">
+                    <br>
+                    <sapn ng-repeat="item in menu">
+                        <ul class="nav nav-sidebar">
+                            <li>&nbsp;&nbsp; <b> <span ng-bind="item.title"></span> </b></li>
+                        </ul>
+                        <ul class="nav nav-sidebar">
+                            <li ng-repeat="page in item.pages" ng-class="{active: page.name == currViewName}" ng-click="updateViewName(page.name)">
+                                <a ng-href="{{page.url}}"><span ng-bind="page.name"></span></a>
+                            </li>
+                        </ul>
+                        <br>
+                    </sapn>
+                </div>
+                
+                <div class="col-md-2 ">
+                </div>
+                
+                <div class="col-md-10 main">
+                    <ng-view></ng-view>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- External javascript libraries--> 
+        <script src="cdn/jquery/jquery-3.2.1.min.js"></script>
+        <script src="cdn/underscore/underscore-min.js"></script>
+        <script src="cdn/angular/angular.min.js"></script>
+        <script src="cdn/angular/angular-animate.min.js"></script>
+        <script src="cdn/angular/angular-route.min.js"></script>
+        <script src="cdn/angular/angular-touch.min.js"></script>
+        <script src="cdn/angular/angular-sanitize.js"></script>
+        <script src="cdn/ui-bootstrap/ui-bootstrap-tpls-2.5.0.min.js"></script>
+        <script src="cdn/bootstrap/js/bootstrap.min.js"></script>
+        <script src="cdn/ng-table/ng-table.min.js"></script>
+        <script src="cdn/alertify/alertify.min.js"></script>
+        <script src="cdn/angcomplete/angucomplete.js"></script>
+        <script src="cdn/angular-ui-select/select.min.js"></script>
+        <script src="cdn/js-move/js-move.js"></script>
+        <script src="cdn/HightCharts/highcharts.js"></script>
+    
+        <!-- Internal javascript libraries-->
+        <script src="scripts/ManageMaslul/ManageMaslulApp.js"></script>
+        <script src="scripts/ManageMaslul/Controllers/ManageController.js"></script>
+        <script src="scripts/ManageMaslul/Controllers/AddToGroupController.js"></script>
+        <script src="scripts/ManageMaslul/Controllers/AddToTrackController.js"></script>
+        <script src="scripts/ManageMaslul/Controllers/GuideStatusController.js"></script>
+        <script src="scripts/ManageMaslul/Controllers/ManageGroupsController.js"></script>
+        <script src="scripts/ManageMaslul/Controllers/ManageUsersController.js"></script>
+        <script src="scripts/ManageMaslul/Controllers/PostMessageController.js"></script>
+        <script src="scripts/ManageMaslul/Controllers/TasksTypesController.js"></script>
+        <script src="scripts/ManageMaslul/Controllers/TracksTypesController.js"></script>
+        <script src="scripts/ManageMaslul/Controllers/WaitingApprovalTasksController.js"></script>
+        <script src="scripts/ManageMaslul/Controllers/WatchTaskModalController.js"></script>
+        <script src="scripts/ManageMaslul/Controllers/ChooseTaskTypeModalController.js"></script>
+        <script src="scripts/ManageMaslul/Controllers/SetNextStageModalController.js"></script>
+        <script src="scripts/ManageMaslul/Controllers/GroupStatusController.js"></script>
+        <script src="scripts/ManageMaslul/Services/GroupsService.js"></script>
+        <script src="scripts/ManageMaslul/Services/TasksTypesService.js"></script>
+        <script src="scripts/ManageMaslul/Services/TracksTypesService.js"></script>
+        <script src="scripts/ManageMaslul/Services/UsersService.js"></script>
+        <script src="scripts/ManageMaslul/Services/WaitingApprovalTasksService.js"></script>
+        <script src="scripts/ManageMaslul/Directives/FileUploadDirective.js"></script>
+        
+    </body>
+</html>

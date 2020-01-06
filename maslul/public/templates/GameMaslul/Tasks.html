@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="/assets/css/Game/Tasks.css"/>
+
+<div id="sky-container">
+    <div class="sea-wave" id="sea-wave-1">
+    </div>
+    <div class="sea" id="sea-2">
+    </div>
+    <div class="cloud" id="cloud-1">
+    </div>
+    <div class="cloud" id="cloud-2">
+    </div>
+    <div class="cloud" id="cloud-3">
+    </div>
+    <div id="dock-floor">
+    </div>
+    <div id="dock-column">
+    </div>
+    <div id="balloon">
+    </div>
+    <div class="ground">
+    </div>
+    <div class="waterfall">
+    </div>
+    <div class="view-content-container">
+        <div class="search-container">
+            <input type="text" class="search-box" ng-model="tasksFilter" placeholder="חפש משימה"/>
+        </div>
+        <div class="tasks-container">
+            <div class="task-box" 
+                 ng-repeat="taskType in bonusTasks | filter: {name: tasksFilter}"
+                 ng-click="openNewTaskModal(taskType._id)"
+                 ng-attr-title="{{taskType.description}}">
+                <span class="task-title" ng-bind="taskType.name">
+                </span>
+                <br/>
+                <img class="image-coins" src="/assets/images/theme/coin-min.png"/>
+                <span class="task-coins"> 
+                    <span ng-bind="taskType.points"></span>
+                    מטבעות 
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

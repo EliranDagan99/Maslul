@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <div class="form-group">
+        <label>קבוצות קיימות:</label>
+        <br>
+        <br>
+        <ul>
+            <li ng-repeat="group in groups">
+                <span ng-bind="group"></span>
+                <button class="btn btn-danger btn-xs" ng-click="delete(group)">X</button>
+            </li>
+        </ul>
+        <br>
+        <br>
+        <button class="btn btn-success" ng-click="createNew()">+ צור חדשה</button>
+    </div>
+</div>

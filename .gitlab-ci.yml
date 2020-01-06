@@ -1,0 +1,32 @@
+image: docker:git
+services:
+  - docker:dind
+
+stages:
+  - package
+  - deploy
+
+package-test:
+  stage: package
+  script:
+    - pwd
+    - mkdir ~/.docker
+    - echo -e "{\n \"proxies\":\n {\n   \"default\":\n   {\n     \"httpProxy\":\"$PROXY_IP\",\n     \"httpsProxy\":\"$PROXY_IP\",\n     \"noProxy\":\"\"\n   }\n }\n}" > ~/.docker/config.json
+    - docker build -t tovaldocker/maslul:"$(date +%F)"-test .
+    - docker tag tovaldocker/maslul:"$(date +%F)"-test tovaldocker/maslul:latest-test
+    - docker login -u tovaldocker --password $DOCKER_HUB_PASSWORD
+    - docker push tovaldocker/maslul:"$(date +%F)"-test
+    - docker push tovaldocker/maslul:latest-test
+  only:
+    - test
+
+deploy-test:
+  image: ubuntu:18.04
+  stage: deploy
+  script:
+    - echo -e "Acquire::http::Proxy \"$PROXY_IP\";\nAcquire::htpps::Proxy \"$PROXY_IP\";" > /etc/apt/apt.conf
+    - apt-get update -y
+    - apt-get install sshpass -y
+    - sshpass -p "$TEST_SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no -tt $TEST_SERVER_USER@$TEST_SERVER_IP docker service update --image tovaldocker/maslul:latest-test maslul_web
+  only:
+    - test

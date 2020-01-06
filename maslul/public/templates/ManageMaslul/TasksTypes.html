@@ -1,0 +1,237 @@
+<div class="container-fluid">
+    <uib-tabset active="active">
+        <uib-tab index="0" heading="עדכון משימה">
+            <br>
+            <div class="form-group">
+                <angucomplete placeholder="חפש משימה" pause="200" selectedobject="$parent.$parent.selectedTaskType" localdata="tasksTypes" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small" />
+            </div>
+            <br>
+            <div ng-if="selectedTaskTypeData">
+                <label>מסלולים שמקושרים למשימה:</label>
+                <ul>
+                    <span ng-if="tracksTypesNamesOfTaskType.length == 0">
+                        אין מסלולים שמקושרים למשימה
+                    </span>
+                    <li ng-if="tracksTypesNamesOfTaskType.length > 0" ng-repeat="trackTypeName in tracksTypesNamesOfTaskType">
+                        <span ng-bind="trackTypeName.name"></span>
+                    </li>
+                </ul>
+                <br>
+                <form>
+                    <div class="form-group">
+                        <label> שם </label>
+                        <input type="text" class="form-control" ng-model="selectedTaskTypeData.name" />
+                    </div>
+                    <div class="form-group">
+                        <label> תיאור </label>
+                        <textarea class="form-control" rows="2" ng-model="selectedTaskTypeData.description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label> סוג </label>
+                        <select class="form-control" ng-model="selectedTaskTypeData.type">
+                            <option value="הדרכתי">
+                                הדרכתי
+                            </option>
+                            <option value="פיקודי">
+                                פיקודי
+                            </option>
+                            <option value="מקצועי">
+                                מקצועי
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label> תמונה </label>
+                        <br>
+                        <a ng-href="/images/taskstypes/{{selectedTaskTypeData.imageName}}" target="_blank">
+                            <span ng-bind="selectedTaskTypeData.imageName"></span>
+                            <img ng-if="selectedTaskTypeData.imageName" ng-src="/images/taskstypes/{{selectedTaskTypeData.imageName}}" width="80" />
+                        </a>
+                        <span ng-if="!selectedTaskTypeData.imageName">
+                            אין תמונה
+                        </span>
+                        <span>
+                            <input type="file" file-upload get-response="getImageResponseSelected(response)"
+                                   action="/files/uploadTaskTypeImage"/>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label> ניקוד </label>
+                        <input type="number" min="0" class="form-control" ng-model="selectedTaskTypeData.points" />
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="selectedTaskTypeData.attachedFilesRequired"> נדרש לצרף קובץ?
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="selectedTaskTypeData.approvalRequired"> נדרש אישור צפ"ה?
+                        </label>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label> שדות דירוג </label>
+                        <span ng-repeat="field in selectedTaskTypeData.ratingsFields">
+                            <div class="form-group">
+                                <label> שם שדה </label>
+                                <input type="text" class="form-control" ng-model="field.name"/>
+                            </div>
+                            <div class="form-group">
+                                <label> תיאור </label>
+                                <textarea class="form-control" rows="2" ng-model="field.description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label> ערך מינימלי </label>
+                                <input type="number" class="form-control" ng-model="field.minRange"/>
+                            </div>
+                            <div class="form-group">
+                                <label> ערך מקסימלי </label>
+                                <input type="number" class="form-control" ng-model="field.maxRange"/>
+                            </div>
+                            <button class="btn btn-danger btn-xs" ng-click="selectedTaskTypeData.ratingsFields.splice($index, 1)">X</button>
+                            <br>
+                        </span>
+                        <button class="btn btn-default btn-sm" ng-click="selectedTaskTypeData.ratingsFields.push({})">הוסף שדה</button>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label> שדות פתוחים </label>
+                        <span ng-repeat="field in selectedTaskTypeData.openFields">
+                            <div class="form-group">
+                                <label> שם שדה </label>
+                                <input type="text" class="form-control" ng-model="field.name"/>
+                            </div>
+                            <div class="form-group">
+                                <label> תיאור </label>
+                                <textarea class="form-control" rows="2" ng-model="field.description"></textarea>
+                            </div>
+                            <button class="btn btn-danger btn-xs" ng-click="selectedTaskTypeData.openFields.splice($index, 1)">X</button>
+                            <br>
+                        </span>
+                        <button class="btn btn-default btn-sm" ng-click="selectedTaskTypeData.openFields.push({})">הוסף שדה</button>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" ng-click="$parent.updateTaskType(selectedTaskTypeData)">עדכן סוג משימה</button>
+                </form>
+            </div>
+        </uib-tab>
+        <uib-tab index="1" heading="יצירת חדשה">
+            <br>
+            <form>
+                <div class="form-group">
+                    <label> שם </label>
+                    <input type="text" class="form-control" ng-model="newTaskTypeData.name" />
+                </div>
+                <div class="form-group">
+                    <label> תיאור </label>
+                    <textarea class="form-control" rows="2" ng-model="newTaskTypeData.description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label> סוג </label>
+                    <select class="form-control" ng-model="newTaskTypeData.type">
+                        <option value="הדרכתי">
+                            הדרכתי
+                        </option>
+                        <option value="פיקודי">
+                            פיקודי
+                        </option>
+                        <option value="מקצועי">
+                            מקצועי
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label> תמונה </label>
+                    <br>
+                    <a ng-href="/images/taskstypes/{{newTaskTypeData.imageName}}" target="_blank">
+                        <span ng-bind="newTaskTypeData.imageName"></span>
+                        <img ng-if="newTaskTypeData.imageName" ng-src="/images/taskstypes/{{newTaskTypeData.imageName}}" width="80" />
+                    </a>
+                    <span ng-if="!newTaskTypeData.imageName">
+                            אין תמונה
+                        </span>
+                    <span>
+                            <input type="file" file-upload get-response="getImageResponseNew(response)"
+                                   action="/files/uploadTaskTypeImage"/>
+                        </span>
+                </div>
+                <div class="form-group">
+                    <label> ניקוד </label>
+                    <input type="number" min="0" class="form-control" ng-model="newTaskTypeData.points" />
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="newTaskTypeData.attachedFilesRequired"> נדרש לצרף קובץ?
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="newTaskTypeData.approvalRequired"> נדרש אישור צפ"ה?
+                    </label>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <label> שדות דירוג </label>
+                    <span ng-repeat="field in newTaskTypeData.ratingsFields">
+                        <div class="form-group">
+                            <label> שם שדה </label>
+                            <input type="text" class="form-control" ng-model="field.name"/>
+                        </div>
+                        <div class="form-group">
+                            <label> תיאור </label>
+                            <textarea class="form-control" rows="2" ng-model="field.description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label> ערך מינימלי </label>
+                            <input type="number" class="form-control" ng-model="field.minRange"/>
+                        </div>
+                        <div class="form-group">
+                            <label> ערך מקסימלי </label>
+                            <input type="number" class="form-control" ng-model="field.maxRange"/>
+                        </div>
+                        <button class="btn btn-danger btn-xs" ng-click="newTaskTypeData.ratingsFields.splice($index, 1)">X</button>
+                        <br>
+                    </span>
+                    <button class="btn btn-default btn-sm" ng-click="newTaskTypeData.ratingsFields.push({})">הוסף שדה</button>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <label> שדות פתוחים </label>
+                    <span ng-repeat="field in newTaskTypeData.openFields">
+                        <div class="form-group">
+                            <label> שם שדה </label>
+                            <input type="text" class="form-control" ng-model="field.name"/>
+                        </div>
+                        <div class="form-group">
+                            <label> תיאור </label>
+                            <textarea class="form-control" rows="2" ng-model="field.description"></textarea>
+                        </div>
+                        <button class="btn btn-danger btn-xs" ng-click="newTaskTypeData.openFields.splice($index, 1)">X</button>
+                        <br>
+                    </span>
+                    <button class="btn btn-default btn-sm" ng-click="newTaskTypeData.openFields.push({})">הוסף שדה</button>
+                </div>
+
+                <button type="submit" class="btn btn-success" ng-click="createTaskType(newTaskTypeData)">צור סוג משימה</button>
+            </form>
+        </uib-tab>
+        <uib-tab index="3" heading="מחיקת משימה">
+
+            <div class="form-group row">
+                <div class="col-lg-4">
+                    <label>בחר משימה</label>
+                    <angucomplete pause="200" selectedobject="selectedTaskDelete" localdata="tasksTypes" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small" />
+                </div>
+                <div class="show-stats col-lg-3 col-lg-offset-2">
+                    <button class="btn" ng-if="selectedTaskDelete" ng-click="deleteTask(selectedTaskDelete)">מחק משימה</button>
+                </div>
+            </div>
+
+        </uib-tab>
+    </uib-tabset>
+</div>

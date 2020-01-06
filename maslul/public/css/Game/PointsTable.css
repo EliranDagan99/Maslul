@@ -1,0 +1,249 @@
+body{
+    margin:0;
+    background-color:#00bff3;
+}
+
+#container{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+#sea-floor{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:10%;
+    background-color:#c69c6d
+}
+
+.sea-wave{
+    position:absolute;
+    top:15%;
+    height:6px;
+    background-image:url(../../images/theme/sea-wave.png);
+}
+
+#sea-wave-1{
+    left:0px;
+    width:100%;
+    z-index:-3;
+}
+
+.sea{
+    position:absolute;
+    top:calc(15% + 6px);
+}
+
+#sea-2{
+    left:0px;
+    width:100%;
+    height:calc(75% - 6px);
+    background-color:#0072bc;
+    z-index:-5;
+}
+
+.algae-a{
+    position:absolute;
+    bottom:10%;
+    width:80px;
+    height:270px;
+    background-image:url(../../images/theme/algae-a.png);
+}
+
+#algae-1{
+    right:10px;
+    z-index:20;
+}
+
+.algae-b{
+    position:absolute;
+    background-image:url(../../images/theme/algae-b.png);
+    bottom:10%;
+    width:162px;
+    height:252px;
+}
+
+#algae-2{
+    right:115px;
+}
+
+.coral-big{
+    position:absolute;
+}
+
+#coral-big-1{
+    right: 50px;
+    bottom:10%;
+    width:300px;
+    height:400px;
+    background-image:url(../../images/theme/coral-big-a.png);
+    z-index:-2;
+}
+
+#coral-big-2{
+    left:70px;
+    bottom:10%;
+    width:650px;
+    height:500px;
+    background-image:url(../../images/theme/coral-big-b.png);
+    z-index:-2;
+}
+
+.coral-a,.coral-b{
+    position:absolute;
+    width:200px;
+    height:150px;
+    bottom:10%;
+    background-image:url(../../images/theme/coral-a.png);
+}
+
+.coral-b{
+    background-image:url(../../images/theme/coral-b.png);
+}
+
+#coral-1{
+    right:180px;
+    z-index:-2;
+}
+
+#coral-2{
+    left:370px;
+    z-index:-2;
+}
+
+.turtle{
+    position:absolute;
+    width:125px;
+    height:75px;
+    background-image:url(../../images/theme/turtle.png);
+    z-index: -2;
+}
+
+#turtle-1{
+    right:10%;
+    bottom:40%;
+    animation-name: turtle-1-frames;
+    animation-duration: 40s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes turtle-1-frames {
+    from {
+        right:-125px;
+    }
+    to {
+        right:100%;
+    }
+}
+
+.fish {
+    position:absolute;
+    width:125px;
+    height:93px;
+    background-image:url(../../images/theme/fish.png);
+    z-index: -2;
+}
+
+#fish-1{
+    left:10%;
+    bottom:30%;
+    animation-name: fish-1-frames;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes fish-1-frames {
+    from {
+        left:-125px;
+    }
+    to {
+        left:100%;
+    }
+}
+
+.crab {
+    position:absolute;
+    width:130px;
+    height:89px;
+    background-image:url(../../images/theme/crab.png);
+    z-index: -2;
+}
+
+#crab-1{
+    left:10%;
+    bottom:10%;
+    animation-name: crab-1-frames;
+    animation-duration: 50s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes crab-1-frames {
+    0% {
+        right:-125px;
+    }
+    50% {
+        right:30%;
+    }
+    100% {
+        right:-125px;
+    }
+}
+
+.view-button-container{
+    position: absolute;
+    top:5px;
+    right: calc(50% - 84px);
+    height:40px;
+}
+
+.button-view-box{
+    padding: 5px 20px 5px;
+    margin: 3px;
+    background-color: #0072bc;
+    color: white;
+    font-family: alefReg;
+    font-size: 18px;
+    font-weight: 600;
+    float:right;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.points-table{
+    width: 500px;
+    position: absolute;
+    right: calc(50% - 250px);
+    text-align: center;
+    font-size: 22px;
+    font-weight: 100;
+    color: #0054a6;
+    text-shadow: -1px 0 #000000, 0 1px #000000, 1px 0 #071129, 0 -1px #000000;
+}
+
+.td-place{
+
+}
+
+.image-coins{
+    margin-top:-7px;
+    margin-left:5px;
+}
+
+.user-coins{
+    color: #e9c10d;
+    text-shadow: -1px 0 #d4ac0d, 0 1px #543000, 1px 0 #ca9500, 0 -1px #a17000;
+}
+
+.points-table th {
+    text-align: center;
+    font-size: 25px;
+    color: #39b54a;
+}

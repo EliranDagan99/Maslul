@@ -1,0 +1,89 @@
+<div class="form-group">
+    <label>בחר סוג מסלול</label>
+    <button class="btn btn-success btn-xs" ng-click="newTrackType()">+</button>
+    <select class="form-control" ng-model="selectedTrackType"
+            ng-options="trackType as trackType.name for trackType in tracksTypes">
+    </select>
+</div>
+<br>
+<br>
+<span ng-if="selectedTrackTypeData">
+    <div class="form-group">
+        <label>שם המסלול</label>
+        <input type="text" class="form-control" ng-model="selectedTrackTypeData.name"/>
+    </div>
+    <br>
+    <br>
+    <label>שלבים</label>
+    <button class="btn btn-success btn-xs" ng-click="newStage()">+</button>
+    <br>
+    <br>
+    <span ng-if="!selectedTrackTypeData.stages">למסלול זה עדיין לא קיימים שלבים</span>
+    <span ng-if="selectedTrackTypeData.stages">
+        <uib-tabset active="activeTab">
+            <uib-tab index="$index + 1" ng-repeat="stage in selectedTrackTypeData.stages" heading="{{stage.name}}">
+                <br>
+                <button class="btn btn-danger btn-xs" ng-click="deleteStage($index)">x מחק שלב</button> 
+                <button class="btn btn-primary btn-xs" ng-click="moveStageBefore($index)">הזז אחורה</button> 
+                <button class="btn btn-primary btn-xs" ng-click="moveStageAfter($index)">הזז קדימה</button>
+                <br>
+                <br>
+                <div class="form-group">
+                    <label>שם השלב</label>
+                    <input type="text" class="form-control" ng-model="stage.name"/>
+                </div>
+                <br>
+                <br>
+                <button class="btn btn-success btn-xs" ng-click="openAddTaskTypeModal(stage.tasks)"> + הוסף משימה</button>
+                <br>
+                <br>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th> שם המשימה </th>
+                            <th> סוג </th>
+                            <th> כמות נדרשת </th>
+                            <th> מחייב? </th>
+                            <th> עריכה </th>
+                            <th> מחק </th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="task in stage.tasks">
+                        <tr>
+                            <td ng-bind="task.name"></td>
+                            <td ng-bind="task.type"></td>
+                            <td>
+                                <input type="number" class="form-control" ng-model="task.minimumAmount"/>
+                            </td>
+                            <td>
+                                <input type="checkbox" ng-model="task.required"/>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary btn-xs" ng-click="upTaskType(stage.tasks, $index)">
+                                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                                </button>
+                                <button class="btn btn-primary btn-xs" ng-click="downTaskType(stage.tasks, $index)">
+                                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-xs" ng-click="deleteTaskType(stage.tasks, $index)">X</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-if="stage.tasks.length == 0">
+                        <tr>
+                            <td colspan="6">
+                                אין משימות בשלב :( 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </uib-tab>
+        </uib-tabset>
+        <br>
+        <button class="btn btn-success" ng-click="updateTrackType(selectedTrackTypeData)">שמור שינויים</button> 
+        <br>
+        <br>
+    </span>
+</span>

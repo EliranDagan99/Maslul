@@ -1,0 +1,254 @@
+@font-face {
+    font-family: alefReg;
+    src: url(../../cdn/alef-font/Alef-Regular.ttf);
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-family: alefReg;
+    text-align: right;
+    direction: rtl;
+    padding-top: 50px;
+    font-size: 16px;
+}
+
+.logo-img {
+    width: 35px;
+    margin-top: -5px;
+}
+
+.brand {
+    font-size: 27px;
+}
+
+.navbar-brand {
+    width: 600px;
+}
+
+.brand-arrow {
+    color: green;
+    margin-right: 7px;
+    font-size: 25px;
+}
+
+.view-name {
+    font-size: 25px;
+}
+
+.main {
+    margin-top: 40px;
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-left: 1px solid #eee;
+}
+
+.nav-sidebar {
+    margin-left: -21px;
+    /* 20px padding + 1px border */
+    margin-bottom: 20px;
+    margin-right: -20px;
+}
+
+.nav-sidebar > li > a {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+    color: #fff;
+    background-color: #428bca;
+}
+
+.angucomplete-holder {
+    width: 400px;
+}
+
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+    cursor: pointer;
+}
+
+.no-access {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 100000;
+    font-size: 50px;
+    color: white;
+    text-align: center;
+}
+
+
+/* spinner*/
+
+.cover {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 99999;
+    top: 0;
+}
+
+.spinner {
+    margin: 100px auto 0;
+    width: 100px;
+    text-align: center;
+    position: relative;
+    top: 25%;
+}
+
+.spinner > div {
+    width: 24px;
+    height: 24px;
+    background-color: #333;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: bouncedelay 1s infinite ease-in-out;
+    animation: bouncedelay 1s infinite ease-in-out;
+    /* Prevent first frame from flickering when animation starts */
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+    background-color: #2c3e50;
+}
+
+.spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+    background-color: #2c3e50;
+}
+
+.spinner .bounce3 {
+    background-color: #2c3e50;
+}
+
+@-webkit-keyframes bouncedelay {
+    0%,
+    80%,
+    100% {
+        -webkit-transform: scale(0.0)
+    }
+    40% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes bouncedelay {
+    0%,
+    80%,
+    100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    40% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+}
+
+.at-view-fade-in.ng-enter {
+    -webkit-transition-property: opacity;
+    -moz-transition-property: opacity;
+    -o-transition-property: opacity;
+    transition-property: opacity;
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    opacity: 0;
+}
+
+.at-view-fade-in.ng-enter-active {
+    opacity: 1;
+}
+
+.at-view-fade-out.ng-leave {
+    -webkit-transition-property: opacity;
+    -moz-transition-property: opacity;
+    -o-transition-property: opacity;
+    transition-property: opacity;
+    -webkit-transition-duration: 1.5s;
+    -moz-transition-duration: 1.5s;
+    -o-transition-duration: 1.5s;
+    transition-duration: 1.5s;
+    opacity: 1;
+}
+
+.at-view-fade-out.ng-leave-active {
+    opacity: 0;
+}
+
+.form-group {
+    padding-bottom: 50px;
+}
+
+.show-stats button {
+    margin-top: 25px;
+}
+
+#chart-container {
+    height: 550px;
+    width: 800px;
+    margin-right: 125px;
+    margin-bottom: 60px;
+}
+
+#chart-container .highcharts-legend text {
+    text-anchor: null;
+}
+
+.btn-tasks {
+    height: 50px;
+    width: 200px;
+    box-shadow: 5px 5px grey;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: rgb(255, 254, 234);
+}
+
+.task-cards {
+    margin-top: 15px;
+}
+
+#group-viewchart {
+    height: 550px;
+    width: 800px;
+    margin-top: 25px;
+    margin-right: 80px;
+    margin-bottom: 60px;
+}

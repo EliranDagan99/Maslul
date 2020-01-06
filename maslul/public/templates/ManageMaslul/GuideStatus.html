@@ -1,0 +1,166 @@
+<div class="container-fluid">
+    <div class="form-group row">
+        <div class="col-lg-4">
+            <label>בחר מדריך</label>
+            <angucomplete placeholder="הזן שם או מספר אישי" pause="200" selectedobject="selectedUser" localdata="users" searchfields="displayName" titlefield="displayName" minlength="1" inputclass="form-control form-control-small" />
+        </div>
+        <div class="show-stats col-lg-3 col-lg-offset-2">
+            <button class="btn" ng-if="selectedUserData" ng-click="ShowStatistics()">{{ButtonMsg}}</button>
+        </div>
+    </div>
+    <div class="row">
+        <div id="chart-container" ng-show="showStatistics"></div>
+    </div>
+    <div ng-if="selectedUserData">
+        <label>שלבים</label>
+        <button class="btn btn-success btn-sm" ng-click="isReadyForNextStage()"> קדם לשלב הבא </button>
+        <button class="btn btn-success btn-sm" ng-click="openChooseTaskTypeModal()"> הוסף משימה </button>
+        <br>
+        <br>
+        <button class="btn" ng-click="viewState='stageStatusNoType'" ng-disabled="viewState == 'stageStatusNoType'" title="תצוגה טבלאית של היעדים והעמידה בהם לפי שלבים">
+            יעדים
+        </button>
+        <button class="btn" ng-click="viewState='doneTasks'" ng-disabled="viewState == 'doneTasks'" title="תצוגה טבלאית של כל המשימות שהוזנו לפי שלבים">
+            תיק מדריך
+        </button>
+        <br>
+        <br>
+        <span ng-if="!selectedUserData.stages">למשתמש זה לא קיימים שלבים</span>
+        <span ng-if="selectedUserData.stages">
+            <uib-tabset active="activeTab">
+                <uib-tab index="$index + 1" ng-repeat="stage in selectedUserData.stages" heading="{{stage.name}}">
+                    <br>
+                    <br>
+                    <span ng-if="viewState == 'stageStatusNoType'">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th> שם המשימה </th>
+                                    <td> כמה זמן נותר לי? </td>
+                                    <th> סוג </th>
+                                    <th> כמות שבוצעה </th>
+                                    <th> מחייב? </th>
+                                    <th> פירוט </th>
+                                    <th> הוסף דד-ליין </th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="task in stage.tasks">
+                                <tr>
+                                    <td>
+                                        <span ng-bind="task.name"></span>
+        <button class="btn btn-success btn-xs" ng-click="openNewTaskModal(task.tasktypeid, $parent.$parent.$index)">+</button>
+        </td>
+        <td>
+            <span>{{task.finalDate}}</span>
+            <div>
+                <uib-progressbar max="task.maxDays" value="task.daysPassed" class="progress-striped active" type="danger">
+                    <span style="color:white; white-space:nowrap;">
+                    <span ng-bind="task.daysPassed"></span> שעות
+                    </span>
+                </uib-progressbar>
+            </div>
+        </td>
+        <td ng-bind="task.type"></td>
+        <td>
+            <uib-progressbar max="task.minimumAmount" value="task.doneAmount" class="progress-striped active" type="{{progressBarType(task.doneAmount, task.minimumAmount)}}">
+                <span style="color:white; white-space:nowrap;">
+                                                <span ng-bind="task.doneAmount"></span> מתוך
+                <span ng-bind="task.minimumAmount"></span>
+                </span>
+            </uib-progressbar>
+        </td>
+        <td>
+            <span ng-if="task.required">V</span>
+            <span ng-if="!task.required">X</span>
+        </td>
+        <td>
+            <button class="btn btn-default" ng-init="bIsShowTasksDetails=false" ng-click="bIsShowTasksDetails=!bIsShowTasksDetails">
+                <span ng-if="!bIsShowTasksDetails"> + </span>
+                <span ng-if="bIsShowTasksDetails"> - </span>
+            </button>
+        </td>
+        <td>
+            <input type="date" ng-blur="addDueDate(selectedUserDate, task)" ng-model="selectedUserDate" />
+        </td>
+        </tr>
+        <tr ng-if="bIsShowTasksDetails">
+            <td colspan="5">
+                <span ng-if="task.doneTasks.length == 0">
+                                            עדיין לא הוזנו משימות :(
+                                        </span>
+                <table class="table table-bordered" ng-if="task.doneTasks.length != 0">
+                    <thead>
+                        <tr>
+                            <th> תאריך </th>
+                            <th> אושר? </th>
+                            <th> פעולות </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="doneTask in task.doneTasks" ng-class="{warning: !doneTask.approval, success: doneTask.approval}">
+                            <td ng-bind="doneTask.date.$date | date:'dd-MM-yyyy'"></td>
+                            <td>
+                                <span ng-if="doneTask.approval == true">V</span>
+                                <span ng-if="doneTask.approval == false">X</span>
+                            </td>
+                            <td>
+                                <button class="btn btn-default" ng-click="openEditTaskModal(doneTask, true)"> צפייה
+                                </button>
+                                <button class="btn btn-default" ng-click="openEditTaskModal(doneTask, false)"> עריכה
+                                </button>
+                                <button class="btn btn-default" ng-click="deleteTask(doneTask)"> מחיקה
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+        <tbody ng-if="stage.tasks.length == 0">
+            <tr>
+                <td colspan="5">
+                    אין משימות בשלב זה :(
+                </td>
+            </tr>
+        </tbody>
+        </table>
+        </span>
+        <span ng-if="viewState == 'doneTasks'">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th> שם המשימה </th>
+                                    <th> סוג </th>
+                                    <th> תאריך </th>
+                                    <th> אושר? </th>
+                                    <th> פעולות </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="doneTask in selectedUserData.doneTasks | filter: { stage: $index }"
+                                    ng-class="{warning: !doneTask.approval, success: doneTask.approval}">
+                                    <td ng-bind="doneTask.name"></td>
+                                    <td ng-bind="doneTask.type"></td>
+                                    <td ng-bind="doneTask.date.$date | date:'dd-MM-yyyy'"></td>
+                                    <td>
+                                        <span ng-if="doneTask.approval == true">V</span>
+        <span ng-if="doneTask.approval == false">X</span>
+        </td>
+        <td>
+            <button class="btn btn-default" ng-click="openEditTaskModal(doneTask, true)"> צפייה
+            </button>
+            <button class="btn btn-default" ng-click="openEditTaskModal(doneTask, false)"> עריכה
+            </button>
+            <button class="btn btn-default" ng-click="deleteTask(doneTask)"> מחיקה
+            </button>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+        </span>
+        </uib-tab>
+        </uib-tabset>
+        </span>
+    </div>
+</div>

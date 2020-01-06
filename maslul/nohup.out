@@ -1,0 +1,96 @@
+
+> testisfun@0.0.0 start /home/ubuntu/maslulhamadrih/maslul
+> node ./bin/www
+
+
+> testisfun@0.0.0 start /home/ubuntu/maslulhamadrih/maslul
+> node ./bin/www
+
+[0mGET / [36m302 [0m10.962 ms - 116[0m
+[0mGET /login?username=bla&password=bla [36m302 [0m3.363 ms - 46[0m
+[0mGET / [36m302 [0m0.993 ms - 78[0m
+[0mGET /assets/Game.html [32m200 [0m12.929 ms - 11641[0m
+[0mGET /assets/css/Game/Preload.css [32m200 [0m1.468 ms - 1457[0m
+[0mGET /assets/images/theme/preloader-dots-animation.gif [32m200 [0m0.958 ms - 1965[0m
+[0mGET /assets/css/Game/Main.css [32m200 [0m3.614 ms - 7138[0m
+[0mGET /assets/cdn/angular-ui-select/select.min.css [32m200 [0m0.846 ms - 5482[0m
+[0mGET /assets/cdn/bootstrap/css/bootstrap.min.css [32m200 [0m4.218 ms - 121200[0m
+[0mGET /assets/cdn/bootstrap/css/bootstrap-theme.min.css [32m200 [0m1.861 ms - 23409[0m
+[0mGET /assets/cdn/alertify/bootstrap.rtl.min.css [32m200 [0m1.038 ms - 1442[0m
+[0mGET /assets/cdn/bootstrap-rtl/bootstrap-rtl.min.css [32m200 [0m13.303 ms - 24903[0m
+[0mGET /assets/cdn/alertify/alertify.rtl.min.css [32m200 [0m19.478 ms - 19203[0m
+[0mGET /assets/cdn/font-awesome/css/font-awesome.min.css [32m200 [0m8.808 ms - 31000[0m
+[0mGET /assets/cdn/jquery/jquery-3.2.1.min.js [32m200 [0m19.916 ms - 86659[0m
+[0mGET /assets/cdn/underscore/underscore-min.js [32m200 [0m8.681 ms - 16449[0m
+[0mGET /assets/cdn/angular/angular-animate.min.js [32m200 [0m19.745 ms - 25765[0m
+[0mGET /assets/cdn/angular/angular-route.min.js [32m200 [0m0.903 ms - 5468[0m
+[0mGET /assets/cdn/angular/angular.min.js [32m200 [0m4.150 ms - 166022[0m
+[0mGET /assets/cdn/angular/angular-touch.min.js [32m200 [0m1.893 ms - 4041[0m
+[0mGET /assets/cdn/angular/angular-sanitize.js [32m200 [0m3.943 ms - 27000[0m
+[0mGET /assets/cdn/alef-font/Alef-Regular.ttf [32m200 [0m2.169 ms - 534576[0m
+[0mGET /assets/cdn/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0 [32m200 [0m8.859 ms - 77160[0m
+[0mGET /assets/images/theme/robby-slides.png [32m200 [0m2.310 ms - 53476[0m
+[0mGET /assets/images/theme/stage.png [32m200 [0m0.909 ms - 367[0m
+[0mGET /assets/images/theme/sea-ribbon-left.png [32m200 [0m0.858 ms - 226[0m
+[0mGET /assets/images/theme/plant-ribbon-left.png [32m200 [0m0.920 ms - 233[0m
+[0mGET /assets/images/theme/plant-ribbon-right.png [32m200 [0m8.585 ms - 227[0m
+[0mGET /assets/images/theme/banner-bottom-a.png [32m200 [0m0.872 ms - 2007[0m
+[0mGET /assets/images/theme/title-box.png [32m200 [0m0.800 ms - 414[0m
+[0mGET /assets/images/theme/banner-top-a.png [32m200 [0m0.902 ms - 1290[0m
+[0mGET /assets/images/theme/medal.png [32m200 [0m8.783 ms - 12266[0m
+[0mGET /assets/images/theme/coin.png [32m200 [0m0.921 ms - 5967[0m
+[0mGET /assets/images/theme/sea-ribbon-right.png [32m200 [0m0.895 ms - 223[0m
+[0mGET /assets/images/theme/robby-eyes-close.png [32m200 [0m13.162 ms - 1047[0m
+[0mGET /assets/cdn/ui-bootstrap/ui-bootstrap-tpls-2.5.0.min.js [32m200 [0m4.172 ms - 125728[0m
+[0mGET /assets/cdn/bootstrap/js/bootstrap.min.js [32m200 [0m19.652 ms - 37045[0m
+[0mGET /assets/cdn/alertify/alertify.min.js [32m200 [0m1.920 ms - 35863[0m
+[0mGET /assets/cdn/js-move/js-move.js [32m200 [0m0.936 ms - 452[0m
+[0mGET /assets/scripts/GameMaslul/GameMaslulApp.js [32m200 [0m1.497 ms - 1783[0m
+[0mGET /assets/scripts/GameMaslul/Controllers/GameController.js [32m200 [0m1.981 ms - 7136[0m
+[0mGET /assets/scripts/GameMaslul/Controllers/ProfileController.js [32m200 [0m1.059 ms - 5197[0m
+[0mGET /assets/scripts/GameMaslul/Controllers/PointsTableController.js [32m200 [0m0.997 ms - 537[0m
+[0mGET /assets/scripts/GameMaslul/Controllers/TasksController.js [32m200 [0m1.925 ms - 2176[0m
+[0mGET /assets/scripts/GameMaslul/Controllers/WatchTaskModalController.js [32m200 [0m0.931 ms - 2965[0m
+[0mGET /assets/scripts/GameMaslul/Services/UsersService.js [32m200 [0m0.863 ms - 1953[0m
+[0mGET /assets/scripts/GameMaslul/Services/TasksTypesService.js [32m200 [0m0.855 ms - 706[0m
+[0mGET /assets/scripts/GameMaslul/Directives/FileUploadDirective.js [32m200 [0m1.531 ms - 1105[0m
+(node:9366) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+[0mGET /assets/templates/GameMaslul/Profile.html [32m200 [0m0.998 ms - 7081[0m
+/home/ubuntu/maslulhamadrih/maslul/node_modules/mongodb/lib/topologies/server.js:240
+            throw err;
+            ^
+
+TypeError: Cannot read property 'db' of null
+    at MongoClient.connect (/home/ubuntu/maslulhamadrih/maslul/utils/dbConn.js:55:20)
+    at err (/home/ubuntu/maslulhamadrih/maslul/node_modules/mongodb/lib/utils.js:411:14)
+    at executeCallback (/home/ubuntu/maslulhamadrih/maslul/node_modules/mongodb/lib/utils.js:401:25)
+    at err (/home/ubuntu/maslulhamadrih/maslul/node_modules/mongodb/lib/operations/mongo_client_ops.js:285:21)
+    at connectCallback (/home/ubuntu/maslulhamadrih/maslul/node_modules/mongodb/lib/operations/mongo_client_ops.js:265:5)
+    at server.connect (/home/ubuntu/maslulhamadrih/maslul/node_modules/mongodb/lib/operations/mongo_client_ops.js:353:14)
+    at Server.<anonymous> (/home/ubuntu/maslulhamadrih/maslul/node_modules/mongodb/lib/topologies/server.js:237:11)
+    at Object.onceWrapper (events.js:315:30)
+    at emitOne (events.js:116:13)
+    at Server.emit (events.js:211:7)
+
+npm ERR! Linux 4.15.0-1043-aws
+npm ERR! argv "/usr/bin/node" "/usr/bin/npm" "start"
+npm ERR! node v8.10.0
+npm ERR! npm  v3.5.2
+npm ERR! code ELIFECYCLE
+npm ERR! testisfun@0.0.0 start: `node ./bin/www`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the testisfun@0.0.0 start script 'node ./bin/www'.
+npm ERR! Make sure you have the latest version of node.js and npm installed.
+npm ERR! If you do, this is most likely a problem with the testisfun package,
+npm ERR! not with npm itself.
+npm ERR! Tell the author that this fails on your system:
+npm ERR!     node ./bin/www
+npm ERR! You can get information on how to open an issue for this project with:
+npm ERR!     npm bugs testisfun
+npm ERR! Or if that isn't available, you can get their info via:
+npm ERR!     npm owner ls testisfun
+npm ERR! There is likely additional logging output above.
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /home/ubuntu/maslulhamadrih/maslul/npm-debug.log
